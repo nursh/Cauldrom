@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 
-type Props = {
 
-}
-
-export class Register extends Component<Props> {
+export class Register extends Component {
 
   render() {
     return (
-      <div>
-        
+      <div className="container">
+        <p>Register form</p>
       </div>
     )
   }

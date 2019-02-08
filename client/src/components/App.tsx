@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
-export class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        Learn React
-      </div>
-    );
-  }
+import { Register } from './Register';
+
+export const App: React.FC = () => {
+  return (
+    <Router>
+      <Route path="/" component={Register} />
+    </Router>
+  );
 }
