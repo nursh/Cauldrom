@@ -1,0 +1,51 @@
+.form {
+
+  &-body {
+    background: $main-background-color;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+  }
+
+  &-container {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 3.5rem -1rem rgba(black, 0.3); 
+    width: 70%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    overflow: hidden;
+  }
+
+  &-side {
+    background-color: $form-side-color;
+    text-align: center;
+    padding: 5rem 1rem;
+  }
+
+  &__logo {
+    height: auto;
+    width: 60%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  &__redirect {
+    color: $dark-color;
+    font-weight: 600;
+    border: .2rem solid $dark-color;
+    padding: .5rem 5rem;
+    font-size: 2rem;
+    display: inline-block;
+    margin-top: 5rem;
+
+    &:hover {
+      color: white;
+      background: $dark-color;
+      border: none;
+    }
+  }
+
+}

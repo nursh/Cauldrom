@@ -7,7 +7,10 @@ import { Register } from './Register';
 export const App: React.FC = () => {
   return (
     <Router>
-      <Route path="/" component={Register} />
+      <div>
+        <Route exact path="/" component={Register} />
+        <Route path="/register" component={Register} />
+      </div>
     </Router>
   );
 }
