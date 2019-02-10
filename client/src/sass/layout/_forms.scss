@@ -12,13 +12,13 @@
     background: white;
     border-radius: 1rem;
     box-shadow: 0 0 3.5rem -1rem rgba(black, 0.3); 
-    width: 70%;
+    width: 65%;
     height: 80%;
     display: grid;
     grid-template-columns: 1.2fr 2fr;
     overflow: hidden;
 
-    &--register {
+    &--signup {
       grid-template-columns: 2fr 1.2fr;
     }
   }
@@ -27,6 +27,13 @@
     background-color: $form-side-color;
     text-align: center;
     padding: 5rem 1rem;
+
+    &__message {
+      font-size: 1.7rem;
+      color: $dark-color;
+      font-weight: 600;
+      margin-top: 5rem;
+    }
   }
 
   &-main {
@@ -50,7 +57,7 @@
     padding: .5rem 5rem;
     font-size: 2rem;
     display: inline-block;
-    margin-top: 5rem;
+    margin-top: 1rem;
 
     &:hover {
       color: white;
@@ -93,6 +100,12 @@
     margin-top: 2rem;
   }
 
+  &--signin {
+    &:first-child {
+      margin-top: 4rem;
+    }
+  }
+
   &:not(:last-child) {
     margin-bottom: 2rem;
   }
@@ -133,5 +146,10 @@
     margin: 0 auto;
     font-size: 1.7rem;
     padding: 1.5rem;
+  }
+
+  &__error {
+    color: $error-color;
+    font-size: 1.5rem;
   }
 }

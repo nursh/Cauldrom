@@ -7,11 +7,11 @@ import {
   Field,
   ErrorMessage
 } from 'formik';
+import * as Yup from 'yup';
 
 
-import cauldromIcon from '../img/icon.svg';
-import googleIcon from '../img/google.svg';
-
+import { GoogleButton } from './GoogleButton';
+import { FormSide } from './FormSide';
 
 type FormValues = {
   name: string,
@@ -28,23 +28,23 @@ class SignUp extends Component<InjectedFormikProps<SignUpProps, FormValues>> {
   render() {
     return (
       <div className="form-body">
-        <div className="form-container form-container--register">
+        <div className="form-container form-container--signup">
           <div className="form-main">
             <h2 className="heading--form-side heading--form-side--small">Register</h2>
             <Form>
               <div className="field">
                 <Field name="name" id="name" placeholder="Username" className="field__input" />
-                <ErrorMessage name="name" />
+                <ErrorMessage component="p" name="name" className="field__error" />
               </div>
 
               <div className="field">
                 <Field type="password" name="password" id="password" placeholder="Password" className="field__input" />
-                <ErrorMessage name="password" />
+                <ErrorMessage component="p" name="password" className="field__error" />
               </div>
 
               <div className="field">
                 <Field type="email" name="email" id="email" placeholder="Email Address" className="field__input" />
-                <ErrorMessage name="email" />
+                <ErrorMessage component="p" name="email" className="field__error" />
               </div> 
 
               <div className="field">
@@ -52,20 +52,9 @@ class SignUp extends Component<InjectedFormikProps<SignUpProps, FormValues>> {
               </div>
             </Form>
             <p className="form__or">OR</p>
-            <div className="google">
-              <NavLink to="/signup" className="google__button">
-                <img src={googleIcon} alt="Google Icon" className="google__logo" />
-                Sign up with Google
-              </NavLink>
-            </div>
+            <GoogleButton path="/api/signup" text="Sign up with Google" />
           </div>
-          <div className="form-side">
-            <div className="form__icon">
-              <img src={cauldromIcon} alt="App Icon" className="form__logo" />
-              <h2 className="heading--form-side">Cauldrom</h2>
-            </div>
-            <NavLink to="/signin" className="form__redirect">Sign In</NavLink>
-          </div>
+          <FormSide text="Sign In" path="/signin" message="Already have an account?"/>
         </div>
       </div>
     )
@@ -77,6 +66,11 @@ export const SignUpFormik = withFormik<SignUpProps, FormValues>({
     name: '',
     email: '',
     password: ''
+  }),
+  validationSchema: Yup.object().shape({
+    name: Yup.string().required('Username is required'),
+    email: Yup.string().email('Must use email format').required('Email is required'),
+    password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required')
   }),
   handleSubmit: (values, { resetForm }) => {
     console.log(values);
