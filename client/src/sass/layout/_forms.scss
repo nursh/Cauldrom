@@ -17,12 +17,23 @@
     display: grid;
     grid-template-columns: 1.2fr 2fr;
     overflow: hidden;
+
+    &--register {
+      grid-template-columns: 2fr 1.2fr;
+    }
   }
 
   &-side {
     background-color: $form-side-color;
     text-align: center;
     padding: 5rem 1rem;
+  }
+
+  &-main {
+    padding: 3rem;
+    text-align: center;
+    margin: 0 auto;
+    width: 80%;
   }
 
   &__logo {
@@ -48,4 +59,79 @@
     }
   }
 
+  &__or {
+    font-size: 2rem;
+    color: $dark-color;
+    position: relative;
+    width: 90%;
+    display: inline-block;
+    margin-top: 2rem;
+    font-weight: 600;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      height: .3rem;
+      width: 40%;
+      background: $dark-color;
+      top: 50%;
+    }
+
+    &::before {
+      left: 0;
+    }
+
+    &::after {
+      right: 0;
+    }
+  }
+}
+
+.field {
+  &:first-child {
+    margin-top: 2rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__input {
+    width: 90%;
+    padding: 1.2rem 2rem;
+    display: block;
+    font-size: 1.5rem;
+    transition: all .3s;
+    font-family: inherit;
+    background: $main-background-color;
+    border: none;
+    color: $dark-color;
+    font-weight: 600;
+    margin: 0 auto;
+    border-radius: .3rem;
+    text-align: left;
+  
+    &:focus {
+      outline: 0;
+      border-bottom: .5rem solid #9446ED;
+      box-shadow: 0 0 2rem rgba(black, 0.1);
+    }
+
+    &::-webkit-input-placeholder {
+      color: rgba($dark-color, 0.7);
+    }
+  }
+
+  &__submit {
+    border: none;
+    font-weight: 600;
+    display: block;
+    width: 90%;
+    background: $primary-color;
+    color: white;
+    margin: 0 auto;
+    font-size: 1.7rem;
+    padding: 1.5rem;
+  }
 }
