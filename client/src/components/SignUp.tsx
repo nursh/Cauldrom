@@ -10,7 +10,6 @@ import {
 import * as Yup from 'yup';
 
 
-import { GoogleButton } from './GoogleButton';
 import { FormSide } from './FormSide';
 
 type FormValues = {
@@ -51,8 +50,6 @@ class SignUp extends Component<InjectedFormikProps<SignUpProps, FormValues>> {
                 <button type="submit" className="field__submit">Register</button>
               </div>
             </Form>
-            <p className="form__or">OR</p>
-            <GoogleButton path="/api/signup" text="Sign up with Google" />
           </div>
           <FormSide text="Sign In" path="/signin" message="Already have an account?"/>
         </div>

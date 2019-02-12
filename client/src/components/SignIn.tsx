@@ -3,7 +3,6 @@ import { withFormik, FormikProps, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 
 
-import { GoogleButton } from './GoogleButton';
 import { FormSide } from './FormSide';
 
 type SignInProps = {
@@ -40,8 +39,6 @@ class SignIn extends Component<SignInProps & FormikProps<FormValues>> {
                 <button type="submit" className="field__submit">Sign in</button>
               </div>
             </Form>
-            <p className="form__or">OR</p>
-            <GoogleButton path="/api/signin" text="Sign in with Google" />
           </div>
 
         </div>

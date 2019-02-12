@@ -3,7 +3,6 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import passport from "passport";
 import { createConnection } from "typeorm";
 
 
@@ -21,9 +20,6 @@ const main = async () => {
   app.use(cors());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
-
-  app.use(passport.initialize());
-  app.use(passport.session());
 
   server.applyMiddleware({ app, path: '/api/graphql' });
 
