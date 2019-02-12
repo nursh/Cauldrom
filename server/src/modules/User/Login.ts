@@ -1,11 +1,11 @@
 import { User } from './../../entity/User';
-import { Resolver, Mutation, Arg, Query } from "type-graphql";
+import { Resolver, Query } from "type-graphql";
 
 
-@Resolver()
+@Resolver(User)
 export class LoginResolver {
 
-  @Query(() => String)
+  @Query(returns => String)
   async name() {
     return 'Cauldrom Application'
   }

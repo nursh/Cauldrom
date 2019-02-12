@@ -22,4 +22,4 @@ services:
       - /app/node_modules
       - ./server:/app
     env_file:
-      - ./env
+      - .env

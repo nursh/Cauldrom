@@ -1,4 +1,5 @@
 import { buildSchema } from "type-graphql";
+
 import { LoginResolver } from "./modules/User/Login";
 
 
