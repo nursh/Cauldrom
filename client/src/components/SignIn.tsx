@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withFormik, FormikProps, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-
+import { NavLink } from 'react-router-dom';
 
 import { FormSide } from './FormSide';
 
@@ -34,6 +34,11 @@ class SignIn extends Component<SignInProps & FormikProps<FormValues>> {
                 <Field type="password" name="password" id="password" placeholder="Password" className="field__input" />
                 <ErrorMessage component="p" name="password" className="field__error" />
               </div>
+
+              <div className="field field--reset">
+                <NavLink to="/resetPassword" className="field__reset">Forgot Password?</NavLink>
+              </div>
+
 
               <div className="field field--signin">
                 <button type="submit" className="field__submit">Sign in</button>

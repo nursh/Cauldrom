@@ -12,7 +12,7 @@ export class User extends BaseEntity {
 
   @Field()
   @Column()
-  name: string;
+  username: string;
 
   @Field()
   @Column('text', { unique: true })
@@ -20,4 +20,7 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
+
+  @Column('bool', { default: false })
+  validated: boolean;
 }

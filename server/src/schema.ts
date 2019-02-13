@@ -1,8 +1,9 @@
 import { buildSchema } from "type-graphql";
 
-import { LoginResolver } from "./modules/User/Login";
+import { SignInResolver } from "./modules/User/SignIn";
+import { SignUpResolver } from "./modules/User/SignUp";
 
 
 export const schema = async () => await buildSchema({
-  resolvers: [LoginResolver],
+  resolvers: [SignInResolver, SignUpResolver],
 })

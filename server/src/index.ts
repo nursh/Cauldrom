@@ -7,6 +7,7 @@ import { createConnection } from "typeorm";
 
 
 import { schema } from "./schema";
+import { formatArgumentValidationError } from "type-graphql";
 
 export const app = express();
 
@@ -14,7 +15,8 @@ const main = async () => {
   await createConnection();
 
   const server = new ApolloServer({
-    schema: await schema()
+    schema: await schema(),
+    formatError: formatArgumentValidationError
   });
 
   app.use(cors());

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import { 
   InjectedFormikProps,
   withFormik,
@@ -47,7 +46,7 @@ class SignUp extends Component<InjectedFormikProps<SignUpProps, FormValues>> {
               </div> 
 
               <div className="field">
-                <button type="submit" className="field__submit">Register</button>
+                <button type="submit" className="field__submit">Sign up</button>
               </div>
             </Form>
           </div>

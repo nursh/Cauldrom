@@ -78,6 +78,24 @@
     }
   }
 
+  &--reset {
+    text-align: right;
+    padding-right: 2rem;
+  }
+
+  &__reset {
+    font-size: 1.6rem;
+    color: $dark-color;
+    font-weight: 600;
+    text-decoration: underline !important;
+    transition: all .3s;
+
+    &:hover {
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+  }
+
   &:not(:last-child) {
     margin-bottom: 2rem;
   }
