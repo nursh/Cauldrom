@@ -1,5 +1,6 @@
+import { MyContext } from './../../types/MyContext';
 import { User } from '../../entity/User';
-import { Resolver, Mutation, Arg, InputType, Field } from "type-graphql";
+import { Resolver, Mutation, Arg, InputType, Field, Ctx } from "type-graphql";
 import bcrypt from 'bcryptjs';
 import { IsEmail } from 'class-validator';
 
@@ -19,7 +20,8 @@ export class SignInResolver {
 
   @Mutation(returns => User, { nullable: true })
   async signin(
-    @Arg("data") { email, password }: SigninArgs
+    @Arg("data") { email, password }: SigninArgs,
+    @Ctx() ctx: MyContext
   ): Promise<User | null> {
 
     const user = await User.findOne({ where: { email } });
@@ -29,7 +31,9 @@ export class SignInResolver {
     const validPassword = bcrypt.compareSync(password, user.password)
     if (!validPassword) return null;
 
-    if (!user.confirmed) return null;
+    if (!user.confirmed) throw new Error('This account has not been validated');
+
+    ctx.req.session!.userId = user.id;
 
     return user;
   }
