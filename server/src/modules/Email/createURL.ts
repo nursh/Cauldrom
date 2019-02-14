@@ -5,10 +5,11 @@ import { client } from '../../redis';
 export const confirmationPrefix = 'confirmation: ';
 const forgotPasswordPrefix = 'forgot-password: ';
 
-export const createURL = async (userId, mailPrefix) => {
+export const createURL = async (userId, mailPrefix?: string) => {
   const token = uuid();
   const prefix = mailPrefix === 'confirm' ? confirmationPrefix : forgotPasswordPrefix;
   client.set(`${prefix} ${token}`, userId, 'EX', ms('1 day'));
 
+  if (!mailPrefix) return `http://localhost:8080/resetPassword/${token}`;
   return `http://localhost:8080/signin/${token}`;
 }

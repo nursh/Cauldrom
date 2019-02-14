@@ -4,11 +4,13 @@ import { Resolver, Mutation, Arg, Query, InputType, Field } from "type-graphql";
 import bcrypt from 'bcryptjs';
 import { sendEmail } from '../Email/emailSender';
 import { createURL } from '../Email/createURL';
+import { doesEmailExist } from './doesEmailExist';
 
 @InputType()
 class SignupArgs {
   @Field()
   @IsEmail()
+  @doesEmailExist()
   email: string;
 
   @Field()

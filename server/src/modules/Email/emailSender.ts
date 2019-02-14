@@ -1,8 +1,7 @@
 import nodemailer from "nodemailer";
 
 
-export async function sendEmail(email: string, url: string) {
-
+export async function sendEmail(email: string, url: string, action = 'confirm') {
 
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -18,16 +17,17 @@ export async function sendEmail(email: string, url: string) {
     }
   });
 
+  const html = action === 'confirm'
+    ? `<p>Confirm your account: <a href=${url}>${url}</a></p>`
+    : `<p>Reset your password: <a href=${url}>${url}</a></p>`
+
   const mailOptions = {
     from: '"Cauldrom Application" <cauldrom@gmail.com>',
     to: email,
     subject: "Cauldrom Application",
     text: 'Confirm your account',
-    html: `<p>Confirm your account: <a href=${url}>${url}</a></p>`
+    html
   };
 
-  const info = await transporter.sendMail(mailOptions);
-
-  console.log("Message sent: %s", info.messageId);
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  await transporter.sendMail(mailOptions);
 }
