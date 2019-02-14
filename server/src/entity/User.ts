@@ -22,5 +22,5 @@ export class User extends BaseEntity {
   password: string;
 
   @Column('bool', { default: false })
-  validated: boolean;
+  confirmed: boolean;
 }

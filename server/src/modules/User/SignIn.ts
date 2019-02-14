@@ -29,7 +29,7 @@ export class SignInResolver {
     const validPassword = bcrypt.compareSync(password, user.password)
     if (!validPassword) return null;
 
-    // if (!user.validated) return null;
+    if (!user.confirmed) return null;
 
     return user;
   }

@@ -2,6 +2,8 @@ import { IsEmail } from 'class-validator';
 import { User } from '../../entity/User';
 import { Resolver, Mutation, Arg, Query, InputType, Field } from "type-graphql";
 import bcrypt from 'bcryptjs';
+import { sendEmail } from '../Email/emailSender';
+import { createURL } from '../Email/createURL';
 
 @InputType()
 class SignupArgs {
@@ -38,6 +40,7 @@ export class SignUpResolver {
       password: hashedPassword
     }).save();
 
+    await sendEmail(email, await createURL(user.id, 'confirm'));
     return user;
   }
 
