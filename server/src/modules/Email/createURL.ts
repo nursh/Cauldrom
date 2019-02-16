@@ -3,7 +3,7 @@ import ms from 'ms';
 import { client } from '../../redis';
 
 export const confirmationPrefix = 'confirmation: ';
-const forgotPasswordPrefix = 'forgot-password: ';
+export const forgotPasswordPrefix = 'forgot-password: ';
 
 export const createURL = async (userId, mailPrefix?: string) => {
   const token = uuid();
