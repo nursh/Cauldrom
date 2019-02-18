@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { withFormik, FormikProps, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import { NavLink } from 'react-router-dom';
+import { NavLink, RouteComponentProps } from 'react-router-dom';
+import { compose, ChildProps } from 'react-apollo';
+
 
 import { FormSide } from './FormSide';
+import { CONFIRM_USER_MUTATION, Props, Mutation, MutationPayload } from '../graphql/mutations/confirmUser';
 
-type SignInProps = {
+interface SignInProps extends RouteComponentProps<any>, ChildProps<Props & Mutation, MutationPayload> {
 
 }
 
@@ -15,7 +18,20 @@ type FormValues = {
 }
 
 class SignIn extends Component<SignInProps & FormikProps<FormValues>> {
+
+  componentDidMount() {
+    const { token } = this.props.match.params;
+    if (token) {
+      this.props.confirmUser!({
+        variables: {
+          token
+        }
+      });
+    }
+  }
+
   render() {
+    console.log(this.props);
     return (
       <div className="form-body">
         <div className="form-container">
@@ -52,17 +68,20 @@ class SignIn extends Component<SignInProps & FormikProps<FormValues>> {
   }
 }
 
-export const SignInFormik = withFormik<SignInProps, FormValues>({
-  mapPropsToValues: () => ({
-    email: '',
-    password: ''
-  }),
-  validationSchema: yup.object().shape({
-    email: yup.string().email('Must use email format').required('Email is required'),
-    password: yup.string().min(8, 'Password must be at least 8 characters').required('Password is required')
-  }),
-  handleSubmit: (values, { resetForm }) => {
-    console.log(values);
-    resetForm();
-  }
-})(SignIn);
+export const SignInFormik = compose(
+  CONFIRM_USER_MUTATION,
+  withFormik<SignInProps, FormValues>({
+    mapPropsToValues: () => ({
+      email: '',
+      password: ''
+    }),
+    validationSchema: yup.object().shape({
+      email: yup.string().email('Must use email format').required('Email is required'),
+      password: yup.string().min(8, 'Password must be at least 8 characters').required('Password is required')
+    }),
+    handleSubmit: (values, { resetForm }) => {
+      console.log(values);
+      resetForm();
+    }
+  })
+)(SignIn);
