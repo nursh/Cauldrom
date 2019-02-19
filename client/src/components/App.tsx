@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { SignUpFormik } from './SignUp';
 import { SignInFormik } from './SignIn';
-import { ResetPassword } from './ResetPassword';
+import { ResetPasswordMain } from './ResetPassword';
 
 export const App: React.FC = () => {
   return (
@@ -12,8 +12,9 @@ export const App: React.FC = () => {
       <div>
         <Route exact path="/" component={SignInFormik} />
         <Route path="/signup" component={SignUpFormik} />
-        <Route path="/signin" component={SignInFormik} />
-        <Route path="/resetPassword" component={ResetPassword} />
+        <Route exact path="/signin" component={SignInFormik} />
+        <Route path="/signin/:token" component={SignInFormik} />
+        <Route path="/resetPassword" component={ResetPasswordMain} />
       </div>
     </Router>
   );

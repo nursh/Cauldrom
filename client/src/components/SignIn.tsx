@@ -31,7 +31,6 @@ class SignIn extends Component<SignInProps & FormikProps<FormValues>> {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="form-body">
         <div className="form-container">

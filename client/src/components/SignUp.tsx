@@ -28,7 +28,7 @@ class SignUp extends Component<InjectedFormikProps<SignUpProps, FormValues>> {
       <div className="form-body">
         <div className="form-container form-container--signup">
           <div className="form-main">
-            <h2 className="heading--form-side heading--form-side--small">Register</h2>
+            <h2 className="heading--form-side heading--form-side--small">Sign Up</h2>
             <Form>
               <div className="field">
                 <Field name="name" id="name" placeholder="Username" className="field__input" />

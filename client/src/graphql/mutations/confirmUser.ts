@@ -39,10 +39,5 @@ interface MutationInput {
 
 export const CONFIRM_USER_MUTATION = graphql<Props, Data, Variable>(
   confirmUser,
-  {
-    name: 'confirmUser',
-    options: ({ token }) => ({
-      variables: { token }
-    })
-  }
+  { name: 'confirmUser' }
 );
