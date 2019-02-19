@@ -8,7 +8,11 @@ import { compose, ChildProps } from 'react-apollo';
 import { FormSide } from './FormSide';
 import { CONFIRM_USER_MUTATION, Props, Mutation, MutationPayload } from '../graphql/mutations/confirmUser';
 
-interface SignInProps extends RouteComponentProps<any>, ChildProps<Props & Mutation, MutationPayload> {
+interface IParams {
+  token: string
+}
+
+interface SignInProps extends RouteComponentProps<IParams>, ChildProps<Props & Mutation, MutationPayload> {
 
 }
 
@@ -51,7 +55,7 @@ class SignIn extends Component<SignInProps & FormikProps<FormValues>> {
               </div>
 
               <div className="field field--reset">
-                <NavLink to="/resetPassword" className="field__reset">Forgot Password?</NavLink>
+                <NavLink to="/forgotPassword" className="field__reset">Forgot Password?</NavLink>
               </div>
 
 

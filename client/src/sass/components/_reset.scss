@@ -1,0 +1,21 @@
+.reset {
+
+  &-container {
+    background: white;
+    width: 50vw;
+    height: 40vh;
+    box-shadow: $white-box-shadow;
+    border-radius: 1rem;
+    border-top: 1rem solid $primary-color;
+  }
+
+  &__submit {
+    width: 40%;
+    margin: 0 auto;
+  }
+
+  &__error {
+    padding-left: 5.5rem;
+  }
+
+}
