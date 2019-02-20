@@ -3,7 +3,7 @@ import { withFormik, Form, Field, ErrorMessage, FormikProps } from 'formik';
 import { compose, ChildProps } from 'react-apollo';
 import * as yup from 'yup';
 import { RouteComponentProps } from 'react-router-dom';
-import { RESET_PASSWORD_MUTATION, Props, Mutation, MutationPayload } from '../graphql/mutations/resetPassword';
+import { FORGOT_PASSWORD_MUTATION, Props, Mutation, MutationPayload } from '../graphql/mutations/forgotPassword';
 
 
 interface ResetProps extends RouteComponentProps<any>, ChildProps<Props & Mutation, MutationPayload> {
@@ -37,7 +37,7 @@ const ForgotPassword: React.FC<Component<ResetProps & FormikProps<ResetFormProps
 
 
 export const ForgotPasswordMain = compose(
-  RESET_PASSWORD_MUTATION,
+  FORGOT_PASSWORD_MUTATION,
   withFormik<ResetProps, ResetFormProps>({
     mapPropsToValues: () => ({
       email: ''
@@ -45,8 +45,13 @@ export const ForgotPasswordMain = compose(
     validationSchema: yup.object().shape({
       email: yup.string().email('Must use email format').required('Email is required'),
     }),
-    handleSubmit: (values, { resetForm, props }) => {
-      console.log(values);
+    handleSubmit: ({ email }, { resetForm, props }) => {
+      console.log(email);
+      props.forgotPassword!({
+        variables: {
+          email
+        }
+      })
       resetForm();
     }
   })

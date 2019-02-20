@@ -7,12 +7,17 @@ import { compose, ChildProps } from 'react-apollo';
 
 import { FormSide } from './FormSide';
 import { CONFIRM_USER_MUTATION, Props, Mutation, MutationPayload } from '../graphql/mutations/confirmUser';
+import { SIGNIN_MUTATION, SigninProps, SignInMutation, SignInMutationPayload } from '../graphql/mutations/signin';
 
 interface IParams {
   token: string
 }
 
-interface SignInProps extends RouteComponentProps<IParams>, ChildProps<Props & Mutation, MutationPayload> {
+type MutationProps = 
+  ChildProps<Props & Mutation, MutationPayload>
+  & ChildProps<SigninProps & SignInMutation, SignInMutationPayload>;
+
+interface SignInProps extends RouteComponentProps<IParams>, MutationProps {
 
 }
 
@@ -73,6 +78,7 @@ class SignIn extends Component<SignInProps & FormikProps<FormValues>> {
 
 export const SignInFormik = compose(
   CONFIRM_USER_MUTATION,
+  SIGNIN_MUTATION,
   withFormik<SignInProps, FormValues>({
     mapPropsToValues: () => ({
       email: '',
@@ -82,8 +88,9 @@ export const SignInFormik = compose(
       email: yup.string().email('Must use email format').required('Email is required'),
       password: yup.string().min(8, 'Password must be at least 8 characters').required('Password is required')
     }),
-    handleSubmit: (values, { resetForm }) => {
-      console.log(values);
+    handleSubmit: (values, { resetForm, props }) => {
+      // console.log(values);
+      console.log(props);
       resetForm();
     }
   })
