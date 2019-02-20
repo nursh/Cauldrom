@@ -49,10 +49,10 @@ export const ResetPasswordMain = compose(
     validationSchema: yup.object().shape({
       password: yup.string().min(8, 'Password must be at least 8 characters').required('Password is required')
     }),
-    handleSubmit: (values, { resetForm, props }) => {
+    handleSubmit: async (values, { resetForm, props }) => {
       console.log(values);
       const { token } = props.match.params;
-      props.resetPassword!({
+      await props.resetPassword!({
         variables: {
           token,
           password: values.password

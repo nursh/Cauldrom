@@ -45,9 +45,9 @@ export const ForgotPasswordMain = compose(
     validationSchema: yup.object().shape({
       email: yup.string().email('Must use email format').required('Email is required'),
     }),
-    handleSubmit: ({ email }, { resetForm, props }) => {
+    handleSubmit: async ({ email }, { resetForm, props }) => {
       console.log(email);
-      props.forgotPassword!({
+      await props.forgotPassword!({
         variables: {
           email
         }

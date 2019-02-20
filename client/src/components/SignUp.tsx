@@ -10,6 +10,8 @@ import * as Yup from 'yup';
 
 
 import { FormSide } from './FormSide';
+import { ChildProps, compose } from 'react-apollo';
+import { SignupMutation, SignupProps, SignupMutationPayload, SIGNUP_MUTATION } from '../graphql/mutations/signup';
 
 type FormValues = {
   name: string,
@@ -17,9 +19,7 @@ type FormValues = {
   password: string
 };
 
-type SignUpProps = {
-
-}
+type SignUpProps = ChildProps<SignupProps & SignupMutation, SignupMutationPayload>
 
 class SignUp extends Component<InjectedFormikProps<SignUpProps, FormValues>> {
 
@@ -57,19 +57,28 @@ class SignUp extends Component<InjectedFormikProps<SignUpProps, FormValues>> {
   }
 }
 
-export const SignUpFormik = withFormik<SignUpProps, FormValues>({
-  mapPropsToValues: () => ({
-    name: '',
-    email: '',
-    password: ''
-  }),
-  validationSchema: Yup.object().shape({
-    name: Yup.string().required('Username is required'),
-    email: Yup.string().email('Must use email format').required('Email is required'),
-    password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required')
-  }),
-  handleSubmit: (values, { resetForm }) => {
-    console.log(values);
-    resetForm();
-  }
-})(SignUp);
+export const SignUpFormik = compose(
+  SIGNUP_MUTATION,
+  withFormik<SignUpProps, FormValues>({
+    mapPropsToValues: () => ({
+      name: '',
+      email: '',
+      password: ''
+    }),
+    validationSchema: Yup.object().shape({
+      name: Yup.string().required('Username is required'),
+      email: Yup.string().email('Must use email format').required('Email is required'),
+      password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required')
+    }),
+    handleSubmit: async ({ name, email, password }, { resetForm, props }) => {
+      await props.signup!({
+        variables: {
+          username: name,
+          email,
+          password
+        }
+      });
+      resetForm();
+    }
+  })
+)(SignUp);

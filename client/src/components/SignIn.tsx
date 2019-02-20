@@ -88,9 +88,13 @@ export const SignInFormik = compose(
       email: yup.string().email('Must use email format').required('Email is required'),
       password: yup.string().min(8, 'Password must be at least 8 characters').required('Password is required')
     }),
-    handleSubmit: (values, { resetForm, props }) => {
-      // console.log(values);
-      console.log(props);
+    handleSubmit: async ({ email, password }, { resetForm, props }) => {
+      await props.signin!({
+        variables: {
+          email,
+          password
+        }
+      });
       resetForm();
     }
   })
