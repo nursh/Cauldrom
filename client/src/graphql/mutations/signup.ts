@@ -1,54 +1,46 @@
-import gql from 'graphql-tag';
-import { graphql, MutationFn } from 'react-apollo';
+import gql from "graphql-tag";
+import { graphql, MutationFn } from "react-apollo";
 
-
-import { User } from '../types';
-
+import { User } from "../types";
 
 const signup = gql`
-  mutation ($email: String!, $password: String!, $username: String!) {
-    signin(data: {
-      email: $email,
-      password: $password,
-      username: $username
-    }) {
+  mutation($email: String!, $password: String!, $username: String!) {
+    signup(data: { email: $email, password: $password, username: $username }) {
       id
     }
   }
 `;
 
 interface Data {
-  signup: User
+  signup: User;
 }
 
 export interface SignupProps {
-  email: string
-  password: string
-  username: string
+  email: string;
+  password: string;
+  username: string;
 }
 
 interface Variable {
-  email: string
-  password: string
-  username: string
+  email: string;
+  password: string;
+  username: string;
 }
 
 export interface SignupMutation {
-  signup?: MutationFn<SignupMutationPayload, MutationInput>
+  signup?: MutationFn<SignupMutationPayload, MutationInput>;
 }
 
 export interface SignupMutationPayload {
-  signup: User
+  signup: User;
 }
 
 interface MutationInput {
-  email: string,
-  password: string
-  username: string
+  email: string;
+  password: string;
+  username: string;
 }
 
-export const SIGNUP_MUTATION = graphql<SignupProps, Data, Variable>(
-  signup,
-  { name: 'signup' }
-);
-
+export const SIGNUP_MUTATION = graphql<SignupProps, Data, Variable>(signup, {
+  name: "signup"
+});

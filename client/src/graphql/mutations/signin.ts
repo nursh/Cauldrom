@@ -46,6 +46,8 @@ interface MutationInput {
 
 export const SIGNIN_MUTATION = graphql<SigninProps, Data, Variable>(
   signin,
-  { name: 'signin' }
+  { 
+    name: 'signin'
+  }
 );
 
