@@ -2,10 +2,10 @@
   COLORS
 ******************/
 
-$main-background-color: rgba(#F2EBFE, 0.4);
-$form-side-color: rgba(#9446ED, 0.3);
-$dark-color: #44056E;
-$primary-color: #9446ED;
+$main-background-color: hsl(260, 100%, 99%);
+$form-side-color: hsla(268, 82%, 60%, 0.3);
+$dark-color: hsl(276, 91%, 25%);
+$primary-color: hsl(268, 82%, 60%);
 $error-color: #EF4E4E;
 
 
@@ -14,3 +14,9 @@ $error-color: #EF4E4E;
   BOX-SHADOW
 ********************/
 $white-box-shadow: 0 0 3.5rem -1rem rgba(black, 0.3);
+
+
+/********************
+  SPACING
+********************/
+$main-padding: 5rem;

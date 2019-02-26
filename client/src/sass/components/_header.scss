@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  color: $main-background-color;
+  background-color: $dark-color;
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding: 1.8rem $main-padding;
+
+
+  &__nav {
+    
+    &__list {
+      list-style: none;
+      display: flex;
+    }
+
+    &__item {
+      margin-left: 6rem;
+    }
+
+    &__link {
+      color: $main-background-color;
+    }
+  }
+}
