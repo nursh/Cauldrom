@@ -52,7 +52,7 @@ export const ResetPasswordMain = compose(
     handleSubmit: async (values, { resetForm, props }) => {
       console.log(values);
       const { token } = props.match.params;
-      await props.resetPassword!({
+      await props.resetPassword({
         variables: {
           token,
           password: values.password

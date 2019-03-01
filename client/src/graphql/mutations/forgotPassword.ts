@@ -24,7 +24,7 @@ interface Variable {
 }
 
 export interface Mutation {
-  forgotPassword?: MutationFn<MutationPayload, MutationInput>
+  forgotPassword: MutationFn<MutationPayload, MutationInput>
 }
 
 export interface MutationPayload {

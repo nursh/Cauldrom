@@ -31,7 +31,7 @@ class SignIn extends Component<SignInProps & FormikProps<FormValues>> {
   componentDidMount() {
     const { token } = this.props.match.params;
     if (token) {
-      this.props.confirmUser!({
+      this.props.confirmUser({
         variables: {
           token
         }
@@ -89,7 +89,7 @@ export const SignInFormik = compose(
       password: yup.string().min(8, 'Password must be at least 8 characters').required('Password is required')
     }),
     handleSubmit: async ({ email, password }, { resetForm, props }) => {
-      const data = await props.signin!({
+      const data = await props.signin({
         variables: {
           email,
           password

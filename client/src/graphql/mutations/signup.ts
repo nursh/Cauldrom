@@ -28,7 +28,7 @@ interface Variable {
 }
 
 export interface SignupMutation {
-  signup?: MutationFn<SignupMutationPayload, MutationInput>;
+  signup: MutationFn<SignupMutationPayload, MutationInput>;
 }
 
 export interface SignupMutationPayload {

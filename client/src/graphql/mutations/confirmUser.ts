@@ -24,7 +24,7 @@ interface Variable {
 }
 
 export interface Mutation {
-  confirmUser?: MutationFn<MutationPayload, MutationInput>
+  confirmUser: MutationFn<MutationPayload, MutationInput>
 }
 
 export interface MutationPayload {

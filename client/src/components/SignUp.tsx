@@ -71,7 +71,7 @@ export const SignUpFormik = compose(
       password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required')
     }),
     handleSubmit: async ({ name, email, password }, { resetForm, props }) => {
-      await props.signup!({
+      await props.signup({
         variables: {
           username: name,
           email,

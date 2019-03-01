@@ -47,7 +47,7 @@ export const ForgotPasswordMain = compose(
     }),
     handleSubmit: async ({ email }, { resetForm, props }) => {
       console.log(email);
-      await props.forgotPassword!({
+      await props.forgotPassword({
         variables: {
           email
         }

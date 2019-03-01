@@ -32,7 +32,7 @@ interface Variable {
 }
 
 export interface SignInMutation {
-  signin?: MutationFn<SignInMutationPayload, MutationInput>
+  signin: MutationFn<SignInMutationPayload, MutationInput>
 }
 
 export interface SignInMutationPayload {
