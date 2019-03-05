@@ -1,12 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 
+
+import { Project } from './Project';
+import { Task } from './Task';
 
 @ObjectType()
 @Entity('User')
 export class User extends BaseEntity {
 
-  @Field(() => ID)
+  @Field(type => ID)
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -23,4 +26,12 @@ export class User extends BaseEntity {
 
   @Column('bool', { default: false })
   confirmed: boolean;
+
+  @Field(type => [Project])
+  @OneToMany(type => Project, project => project.author)
+  projects: Project[];
+
+  @Field(type => [Task])
+  @OneToMany(type => Task, task => task.author)
+  tasks: Task[];
 }
