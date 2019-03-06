@@ -1,3 +1,4 @@
+import { EditProjectInput } from './editProjectInput';
 import { MyContext } from './../../types/MyContext';
 import { CreateProjectInput } from './createProjectInput';
 import { User } from '../../entity/User';
@@ -71,5 +72,26 @@ export class ProjectResolver {
       return true;
     }
     return false;
+  }
+
+  @Mutation(returns => Project)
+  async editProject(
+    @Arg("data") data: EditProjectInput,
+    @Ctx() { req }: MyContext
+  ) {
+    const { id, ...updateData } = data;
+    const user = await User.findOne({ id: req.session!.userId });
+    if (!user) throw new Error("User does not exist");
+
+    const project = await Project.findOne({ id });
+    if (!project) throw new Error("Project does not exist");
+
+    if (project.author.id !== user.id) {
+      throw new Error("You're not authorized to edit other author's projects");
+    }
+
+    await Project.update(id, { ...updateData });
+    const editedProject = await Project.findOne({ id });
+    return editedProject;
   }
 }
