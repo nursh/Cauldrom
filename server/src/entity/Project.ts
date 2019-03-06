@@ -22,18 +22,18 @@ export class Project extends BaseEntity {
   description: string;
 
   @Field(type => User)
-  @ManyToOne(type => User, author => author.projects)
+  @ManyToOne(type => User, author => author.projects, { eager: true })
   author: User;
 
   @Field(type => [User])
-  @OneToMany(type => User, member => member.projects, { nullable: true })
+  @OneToMany(type => User, member => member.projects)
   members: User[];
 
   @Field(type => [Task])
-  @OneToMany(type => Task, task => task.project, { nullable: true })
+  @OneToMany(type => Task, task => task.project, { eager: true })
   tasks: Task[];
 
   @Field(type => [Notification])
-  @OneToMany(type => Notification, notification => notification.project, { nullable: true })
+  @OneToMany(type => Notification, notification => notification.project, { eager: true })
   notifications: Notification[];
 }

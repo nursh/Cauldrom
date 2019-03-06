@@ -8,24 +8,25 @@ import { Resolver, Query, Arg, Mutation, Ctx } from "type-graphql";
 @Resolver(Project)
 export class ProjectResolver {
 
-  @Query(returns => Project, { nullable: true })
+  @Query(returns => Project)
   async project(@Arg("id") id: string) {
     const project = await Project.findOne(id);
     if (!project) throw new Error("Project does not exist");
     return project;
   }
 
-  @Query(returns => [Project], { nullable: true })
+  @Query(returns => [Project])
   async projects() {
-    const projects = await Project.find({ relations: ["user"]});
+    const projects = await Project.find();
     return projects;
   }
 
-  @Query(returns => [Project], { nullable: true })
-  async myProjects(@Arg("id") id: string) {
-    const projects = await User.findProjects(id);
-    return projects;
-  }
+  // @Query(returns => [Project])
+  // async myProjects(@Ctx() { req }: MyContext) {
+  //   const id = req.session!.userId;
+  //   const user = await User.findProjects(id);
+  //   return user[0].projects;
+  // }
 
   @Mutation(returns => Project)
   async createProject(
@@ -51,8 +52,24 @@ export class ProjectResolver {
   }
 
   @Mutation(returns => Boolean)
-  async deleteProject(@Arg("id") id: string) {
-    const removedProject = await Project.delete(id);
-    return removedProject;
+  async deleteProject(
+    @Arg("id") id: string,
+    @Ctx() { req }: MyContext
+  ) {
+    const user = await User.findOne({ id: req.session!.userId });
+    if (!user) throw new Error("User does not exist");
+
+    const project = await Project.findOne({ id });
+    if (!project) return false;
+
+    if (project.author.id !== user.id) {
+      throw new Error("You're not authorized to delete other author's projects");
+    }
+
+    const removedProject = await Project.remove(project);
+    if (removedProject === project) {
+      return true;
+    }
+    return false;
   }
 }

@@ -12,9 +12,9 @@ export class Notification extends BaseEntity {
 
   @Field()
   @Column()
-  message: string
+  message: string;
 
   @Field(type => Project)
   @ManyToOne(type => Project, project => project.notifications)
-  project: Project
+  project: Project;
 }
