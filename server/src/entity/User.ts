@@ -6,7 +6,7 @@ import { Project } from './Project';
 import { Task } from './Task';
 
 @ObjectType()
-@Entity('User')
+@Entity()
 export class User extends BaseEntity {
 
   @Field(type => ID)
@@ -27,11 +27,17 @@ export class User extends BaseEntity {
   @Column('bool', { default: false })
   confirmed: boolean;
 
-  @Field(type => [Project])
+  @Field(type => [Project], { nullable: true })
   @OneToMany(type => Project, project => project.author)
   projects: Project[];
 
-  @Field(type => [Task])
+  @Field(type => [Task], { nullable: true })
   @OneToMany(type => Task, task => task.author)
   tasks: Task[];
+
+  static findProjects(id: string) {
+    return this.createQueryBuilder('user')
+      .where("user.id = :id", { id })
+      .getMany();
+  }
 }

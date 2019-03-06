@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID } from 'type-graphql';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, BaseEntity } from "typeorm";
 import { User } from "./User";
 import { Task } from './Task';
 import { Notification } from './Notification';
@@ -7,7 +7,7 @@ import { Notification } from './Notification';
 
 @ObjectType()
 @Entity() 
-export class Project {
+export class Project extends BaseEntity {
 
   @Field(type => ID)
   @PrimaryGeneratedColumn("uuid")
@@ -26,14 +26,14 @@ export class Project {
   author: User;
 
   @Field(type => [User])
-  @OneToMany(type => User, member => member.projects)
+  @OneToMany(type => User, member => member.projects, { nullable: true })
   members: User[];
 
   @Field(type => [Task])
-  @OneToMany(type => Task, task => task.project)
+  @OneToMany(type => Task, task => task.project, { nullable: true })
   tasks: Task[];
 
   @Field(type => [Notification])
-  @OneToMany(type => Notification, notification => notification.project)
+  @OneToMany(type => Notification, notification => notification.project, { nullable: true })
   notifications: Notification[];
 }

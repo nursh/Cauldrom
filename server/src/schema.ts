@@ -1,3 +1,4 @@
+import { ProjectResolver } from './modules/Project/project';
 import { buildSchema } from "type-graphql";
 
 import { SignInResolver } from "./modules/User/SignIn";
@@ -15,6 +16,7 @@ export const schema = async () =>
       ConfirmUserResolver,
       ForgotPasswordResolver,
       LogoutResolver,
-      ResetPasswordResolver
+      ResetPasswordResolver,
+      ProjectResolver
     ]
   });

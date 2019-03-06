@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID } from 'type-graphql';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BaseEntity } from "typeorm";
 
 
 import { User } from "./User";
@@ -8,7 +8,7 @@ import { Project } from './Project';
 
 @ObjectType()
 @Entity()
-export class Task {
+export class Task extends BaseEntity {
 
   @Field(type => ID)
   @PrimaryGeneratedColumn("uuid")
@@ -26,4 +26,4 @@ export class Task {
   @ManyToOne(type => Project, project => project.tasks)
   project: Project;
 
-}
+} 

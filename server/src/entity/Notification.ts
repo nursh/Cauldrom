@@ -1,10 +1,10 @@
 import { ObjectType, Field, ID } from 'type-graphql';
-import { PrimaryGeneratedColumn, Column, Entity, ManyToOne } from "typeorm";
+import { PrimaryGeneratedColumn, Column, Entity, ManyToOne, BaseEntity } from "typeorm";
 import { Project } from './Project';
 
 @ObjectType()
 @Entity()
-export class Notification {
+export class Notification extends BaseEntity {
 
   @Field(type => ID)
   @PrimaryGeneratedColumn("uuid")
