@@ -8,6 +8,7 @@ import { ForgotPasswordResolver } from "./modules/User/ForgotPassword";
 import { ConfirmUserResolver } from "./modules/User/ConfirmUser";
 import { LogoutResolver } from "./modules/User/Logout";
 import { ResetPasswordResolver } from "./modules/User/ResetPassword";
+import { NotificationResolver } from './modules/Nofication/notification';
 
 export const schema = async () =>
   await buildSchema({
@@ -19,6 +20,7 @@ export const schema = async () =>
       LogoutResolver,
       ResetPasswordResolver,
       ProjectResolver,
-      TaskResolver
+      TaskResolver,
+      NotificationResolver
     ]
   });
