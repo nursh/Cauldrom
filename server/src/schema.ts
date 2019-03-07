@@ -1,3 +1,4 @@
+import { TaskResolver } from './modules/Task/task';
 import { ProjectResolver } from './modules/Project/project';
 import { buildSchema } from "type-graphql";
 
@@ -17,6 +18,7 @@ export const schema = async () =>
       ForgotPasswordResolver,
       LogoutResolver,
       ResetPasswordResolver,
-      ProjectResolver
+      ProjectResolver,
+      TaskResolver
     ]
   });

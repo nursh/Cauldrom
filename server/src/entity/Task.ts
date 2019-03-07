@@ -19,7 +19,7 @@ export class Task extends BaseEntity {
   text: string;
 
   @Field(type => User)
-  @ManyToOne(type => User, author => author.tasks)
+  @ManyToOne(type => User, author => author.tasks, { eager: true })
   author: User;
 
   @Field(type => Project)

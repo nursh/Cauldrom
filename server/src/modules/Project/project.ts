@@ -22,12 +22,12 @@ export class ProjectResolver {
     return projects;
   }
 
-  // @Query(returns => [Project])
-  // async myProjects(@Ctx() { req }: MyContext) {
-  //   const id = req.session!.userId;
-  //   const user = await User.findProjects(id);
-  //   return user[0].projects;
-  // }
+  @Query(returns => [Project])
+  async myProjects(@Ctx() { req }: MyContext) {
+    const id = req.session!.userId;
+    const projects = await Project.find({ author: id });
+    return projects;
+  }
 
   @Mutation(returns => Project)
   async createProject(
@@ -93,5 +93,52 @@ export class ProjectResolver {
     await Project.update(id, { ...updateData });
     const editedProject = await Project.findOne({ id });
     return editedProject;
+  }
+
+  @Mutation(returns => Boolean)
+  async joinProject(
+    @Arg("id") id: string,
+    @Ctx() { req }: MyContext
+  ) {
+    const user = await User.findOne({ id: req.session!.userId });
+    if (!user) throw new Error("User does not exist");
+
+    const project = await Project.findOne({ id });
+    if (!project) throw new Error("Project does not exist");
+
+    let { members } = project;
+
+
+    if (!members.some(usr => usr.id === user.id)) {
+      members = [...members, user];
+      project.members = members;
+      await project.save();
+      return true;
+    }
+
+    return false;
+  }
+
+  @Mutation(type => Boolean)
+  async leaveProject(
+    @Arg("id") id: string,
+    @Ctx() { req }: MyContext
+  ) {
+    const user = await User.findOne({ id: req.session!.userId });
+    if (!user) throw new Error("User does not exist");
+
+    const project = await Project.findOne({ id });
+    if (!project) throw new Error("Project does not exist");
+
+    let { members } = project;
+
+    if (members.some(usr => usr.id === user.id)) {
+      members = members.filter(usr => usr.id !== user.id);
+      project.members = members;
+      await project.save();
+      return true;
+    }
+
+    return false;
   }
 }

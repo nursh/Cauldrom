@@ -34,11 +34,4 @@ export class User extends BaseEntity {
   @Field(type => [Task])
   @OneToMany(type => Task, task => task.author)
   tasks: Task[];
-
-  static findProjects(id: string) {
-    return this.createQueryBuilder('user')
-      .leftJoinAndSelect('user.projects', 'author')
-      .where("user.id = :id", { id })
-      .getMany();
-  }
 }

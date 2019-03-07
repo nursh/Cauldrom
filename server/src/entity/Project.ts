@@ -1,5 +1,13 @@
 import { ObjectType, Field, ID } from 'type-graphql';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, BaseEntity } from "typeorm";
+import { Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  BaseEntity,
+  ManyToMany,
+  JoinTable 
+} from "typeorm";
 import { User } from "./User";
 import { Task } from './Task';
 import { Notification } from './Notification';
@@ -14,7 +22,7 @@ export class Project extends BaseEntity {
   id: string;
 
   @Field()
-  @Column() 
+  @Column({ unique: true }) 
   name: string;
 
   @Field()
@@ -26,14 +34,15 @@ export class Project extends BaseEntity {
   author: User;
 
   @Field(type => [User])
-  @OneToMany(type => User, member => member.projects)
+  @ManyToMany(type => User, { eager: true })
+  @JoinTable()
   members: User[];
 
   @Field(type => [Task])
-  @OneToMany(type => Task, task => task.project, { eager: true })
+  @OneToMany(type => Task, task => task.project, { eager: true, onDelete: 'CASCADE' })
   tasks: Task[];
 
   @Field(type => [Notification])
-  @OneToMany(type => Notification, notification => notification.project, { eager: true })
+  @OneToMany(type => Notification, notification => notification.project, { eager: true, onDelete: 'CASCADE' })
   notifications: Notification[];
 }
