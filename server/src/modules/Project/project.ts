@@ -34,8 +34,7 @@ export class ProjectResolver {
     @Arg("data") { name, description }: CreateProjectInput,
     @Ctx() { req }: MyContext
   ) {
-    const id = req.session!.userId;
-    const user = await User.findOne({ id });
+    const user = await User.findOne({ id: req.session!.userId });
 
     if (!user) {
       throw new Error("Must be logged in to create project")
