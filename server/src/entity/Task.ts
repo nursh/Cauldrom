@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID } from 'type-graphql';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BaseEntity, BeforeInsert } from "typeorm";
 
 
 import { User } from "./User";
@@ -26,4 +26,12 @@ export class Task extends BaseEntity {
   @ManyToOne(type => Project, project => project.tasks)
   project: Project;
 
+  @Field(type => Date)
+  @Column()
+  creationDate: Date;
+
+  @BeforeInsert()
+  setDate() {
+    this.creationDate = new Date();
+  }
 } 
