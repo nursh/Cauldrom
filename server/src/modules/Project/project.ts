@@ -6,6 +6,7 @@ import { Project } from '../../entity/Project';
 import { Resolver, Query, Arg, Mutation, Ctx } from "type-graphql";
 
 
+
 @Resolver(Project)
 export class ProjectResolver {
 
@@ -24,9 +25,19 @@ export class ProjectResolver {
 
   @Query(returns => [Project])
   async myProjects(@Ctx() { req }: MyContext) {
-    const id = req.session!.userId;
+    const id = req.session!.userId; 
+
     const projects = await Project.find({ author: id });
-    return projects;
+    const mProjects = await Project.find();
+
+    const memberProjects = mProjects.filter(project =>
+      (project.members.some(usr => usr.id === id) && project.author.id !== id)
+    )
+
+    return [
+      ...projects,
+      ...memberProjects
+    ];
   }
 
   @Mutation(returns => Project)

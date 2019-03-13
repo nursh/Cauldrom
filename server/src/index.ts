@@ -13,6 +13,7 @@ import { schema } from "./schema";
 import { redisOpts } from "./redis";
 import { formatArgumentValidationError } from "type-graphql";
 
+
 const main = async () => {
   await createConnection();
   const app = express();
@@ -46,3 +47,4 @@ const main = async () => {
 };
 
 main();
+
