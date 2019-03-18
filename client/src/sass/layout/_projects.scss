@@ -2,4 +2,14 @@
 
   background: $main-background-color;
   height: 100vh;
+
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 3rem;
+    width: 80%;
+    margin: 5rem auto;
+
+  }
 }

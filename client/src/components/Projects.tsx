@@ -7,7 +7,15 @@ export class Projects extends Component {
     return (
       <div className="projects">
         <MainHeader />
-        <ProjectCard />
+
+        <div className="projects__list">
+         {
+           [1, 2, 3, 4].map(n => {
+             return <ProjectCard key={n} />;
+           })
+         }
+        </div>
+
       </div>
     )
   }

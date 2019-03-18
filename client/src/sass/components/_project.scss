@@ -1,0 +1,24 @@
+.project {
+  background: white;
+  margin-bottom: 3rem;
+  // padding: 2rem;
+  border-radius: 1rem;
+  border: .2rem solid $dark-color;
+  font-size: 1.4rem;
+
+  &__title {
+    border-bottom: .05rem solid $dark-color;
+    padding: .5rem 2rem;
+  }
+
+  &__description {
+    border-bottom: .05rem solid $dark-color;
+    padding: 1rem 2rem;
+  }
+
+  &__author {
+    font-size: 1.2rem;
+    text-align: right;
+    padding: .5rem 2rem;
+  }
+}
