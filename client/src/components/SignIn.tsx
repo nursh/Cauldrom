@@ -98,7 +98,7 @@ export const SignInFormik = compose(
       const result: any = {...data};
       const { signin } = result.data;
       if (signin) {
-        props.history.push('/header');
+        props.history.push('/main');
       }
     }
   })

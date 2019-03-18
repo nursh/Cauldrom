@@ -6,7 +6,7 @@ import { SignUpFormik } from './SignUp';
 import { SignInFormik } from './SignIn';
 import { ResetPasswordMain } from './ResetPassword';
 import { ForgotPasswordMain } from './ForgotPassword';
-import { MainHeader } from './Header';
+import { Projects } from './Projects';
 
 export const App: React.FC = () => {
   return (
@@ -18,7 +18,7 @@ export const App: React.FC = () => {
         <Route path="/signin/:token" component={SignInFormik} />
         <Route path="/resetPassword/:token" component={ResetPasswordMain} />
         <Route path="/forgotPassword" component={ForgotPasswordMain} />
-        <Route path="/header" component={MainHeader} />
+        <Route path="/projects" component={Projects} />
       </div>
     </Router>
   );
