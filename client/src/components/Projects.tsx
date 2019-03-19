@@ -7,7 +7,12 @@ export class Projects extends Component {
     return (
       <div className="projects">
         <MainHeader />
-
+        <nav>
+          <ul className="projects__tabs">
+            <li className="projects__tabs__item projects__tabs__item--active">All Projects</li>
+            <li className="projects__tabs__item">My Projects</li>
+          </ul>
+        </nav>
         <div className="projects__list">
          {
            [1, 2, 3, 4].map(n => {

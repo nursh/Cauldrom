@@ -7,6 +7,7 @@ import { SignInFormik } from './SignIn';
 import { ResetPasswordMain } from './ResetPassword';
 import { ForgotPasswordMain } from './ForgotPassword';
 import { Projects } from './Projects';
+import { CreateProject } from './CreateProject';
 
 export const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ export const App: React.FC = () => {
         <Route path="/resetPassword/:token" component={ResetPasswordMain} />
         <Route path="/forgotPassword" component={ForgotPasswordMain} />
         <Route path="/projects" component={Projects} />
+        <Route path="/createProject" component={CreateProject} />
       </div>
     </Router>
   );

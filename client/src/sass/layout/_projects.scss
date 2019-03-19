@@ -8,8 +8,32 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 3rem;
-    width: 80%;
+    width: 90%;
     margin: 5rem auto;
 
+  }
+
+  &__tabs {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-top: 3rem;
+    color: $dark-color;
+
+    &__item {
+      cursor: pointer;
+      padding-bottom: .5rem;
+      transition: all .2s;
+
+      &--active,
+      &:hover {
+        border-bottom: .3rem solid $dark-color;
+      }
+
+      &:not(:last-child) {
+        margin-right: 3rem;
+      }
+    }
   }
 }
